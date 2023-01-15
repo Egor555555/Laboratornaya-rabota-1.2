@@ -14,47 +14,48 @@ void Solve()
 
     cin >> k >> n;
 
-    struct Humans
+    struct Persons
     {
         int month;
         int year;
-        int ID;
-        int time;
-    } Owners[100] = {};
+        int code;
+        int hours;
+    }Clients[100] = {};
 
     struct Years
     {
         int month;
-        int time;
+        int hours;
     } years[2011] = {};
 
     for (int i = 2000; i <= 2010; i++)
-        years[i].time = 31;
+        years[i].hours = 31;
 
     for (int i = 0; i < n; i++)
     {
-        cin >> Owners[i].year >> Owners[i].month >> Owners[i].ID >> Owners[i].time;
-        if (Owners[i].ID == k)
+        cin >> Clients[i].year >> Clients[i].month >> Clients[i].code >> Clients[i].hours;
+        if (Clients[i].code == k)
         {
-            if (years[Owners[i].year].time >= Owners[i].time)
+            if (years[Clients[i].year].hours >= Clients[i].hours)
             {
-                if (years[Owners[i].year].time == Owners[i].time)
+                if (years[Clients[i].year].hours == Clients[i].hours)
                 {
-                    if (years[Owners[i].year].month < Owners[i].month) {
+                    if (years[Clients[i].year].month < Clients[i].month) {
 
-                        years[Owners[i].year].month = Owners[i].month;
+                        years[Clients[i].year].month = Clients[i].month;
                     }
                 }
                 else
                 {
-                    years[Owners[i].year].time = Owners[i].time;
-                    years[Owners[i].year].month = Owners[i].month;
+                    years[Clients[i].year].hours = Clients[i].hours;
+                    years[Clients[i].year].month = Clients[i].month;
 
                 }
             }
         }
     }
+
     for (int i = 2000; i <= 2010; i++)
-        if (years[i].time != 0 && years[i].time != 31) 
-            cout << i << " " << years[i].month << " " << years[i].time << endl;
+        if (years[i].hours != 0 && years[i].hours != 31)
+            cout << i << " " << years[i].month << " " << years[i].hours << endl;
 }
