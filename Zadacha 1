@@ -15,7 +15,7 @@ struct FitnessPerson {
 int year(string s)
 {
     string year = "";
-    for (int i = 2; i < 7; i++)
+    for (int i = 0; i < 5; i++)
     {
         if ((int('0') <= int(s[i])) and (int(s[i]) <= int('9')))
         {
@@ -27,7 +27,7 @@ int year(string s)
 int month(string s)
 {
     string month = "";
-    for (int i = 0; i < 2; i++)
+    for (int i = 5; i < 7; i++)
     {
         if ((int('0') <= int(s[i])) and (int(s[i]) <= int('9')))
         {
@@ -39,7 +39,7 @@ int month(string s)
 int hours(string s)
 {
     string hours = "";
-    for (int i = 10; i < s.length(); i++)
+    for (int i = 7; i < 9; i++)
     {
         if ((int('0') <= int(s[i])) and (int(s[i]) <= int('9')))
         {
@@ -51,7 +51,7 @@ int hours(string s)
 int code(string s)
 {
     string code = "";
-    for (int i = 7; i < 10; i++)
+    for (int i = 9; i < s.length(); i++)
     {
         if ((int('0') <= int(s[i])) and (int(s[i]) <= int('9')))
         {
