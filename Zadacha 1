@@ -2,111 +2,111 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
-#include<string>
+#include <string>
 #include <iomanip>
 #include "pt4exam.h"
 using namespace std;
 struct FitnessPerson {
-    int year;
-    int month;
-    int hours;
-    int code;
+	int year;
+	int month;
+	int hours;
+	int code;
 };
 int year(string s)
 {
-    string year = "";
-    for (int i = 0; i < 5; i++)
-    {
-        if ((int('0') <= int(s[i])) and (int(s[i]) <= int('9')))
-        {
-            year += s[i];
-        }
-    }
-    return stoi(year);
+	string year = "";
+	for (int i = 0; i < 4; i++)
+	{
+		if ((int('0') <= int(s[i])) and (int(s[i]) <= int('9')))
+		{
+			year += s[i];
+		}
+	}
+	return stoi(year);
 }
 int month(string s)
 {
-    string month = "";
-    for (int i = 5; i < 7; i++)
-    {
-        if ((int('0') <= int(s[i])) and (int(s[i]) <= int('9')))
-        {
-            month += s[i];
-        }
-    }
-    return stoi(month);
+	string month = "";
+	for (int i = 4; i < 7; i++)
+	{
+		if ((int('0') <= int(s[i])) and (int(s[i]) <= int('9')))
+		{
+			month += s[i];
+		}
+	}
+	return stoi(month);
 }
 int hours(string s)
 {
-    string hours = "";
-    for (int i = 7; i < 9; i++)
-    {
-        if ((int('0') <= int(s[i])) and (int(s[i]) <= int('9')))
-        {
-            hours += s[i];
-        }
-    }
-    return stoi(hours);
+	string hours = "";
+	for (int i = 7; i < 9; i++)
+	{
+		if ((int('0') <= int(s[i])) and (int(s[i]) <= int('9')))
+		{
+			hours += s[i];
+		}
+	}
+	return stoi(hours);
 }
 int code(string s)
 {
-    string code = "";
-    for (int i = 9; i < s.length(); i++)
-    {
-        if ((int('0') <= int(s[i])) and (int(s[i]) <= int('9')))
-        {
-            code += s[i];
-        }
-    }
-    return stoi(code);
+	string code = "";
+	for (int i = 9; i < s.length(); i++)
+	{
+		if ((int('0') <= int(s[i])) and (int(s[i]) <= int('9')))
+		{
+			code += s[i];
+		}
+	}
+	return stoi(code);
 }void Sort(FitnessPerson** p, int N)
 {
-    for (int i = 1; i < N; ++i)
-    {
-        for (int j = 0; j < N - i; j++)
-        {
-            if (p[j]->hours < p[j + 1]->hours)
-            {
-                FitnessPerson* temp = p[j];
-                p[j] = p[j + 1];
-                p[j + 1] = temp;
-            }
-            else if (p[j]->hours == p[j + 1]->hours)
-            {
-                if (p[j]->year < p[j + 1]->year && p[j]->month < p[j + 1]->month)
-                {
-                    FitnessPerson* temp = p[j];
-                    p[j] = p[j + 1];
-                    p[j + 1] = temp;
-                }
-            }
-        }
-    }
+	for (int i = 1; i < N; ++i)
+	{
+		for (int j = 0; j < N - i; j++)
+		{
+			if (p[j]->hours < p[j + 1]->hours)
+			{
+				FitnessPerson* temp = p[j];
+				p[j] = p[j + 1];
+				p[j + 1] = temp;
+			}
+			else if (p[j]->hours == p[j + 1]->hours)
+			{
+				if (p[j]->year < p[j + 1]->year && p[j]->month < p[j + 1]->month)
+				{
+					FitnessPerson* temp = p[j];
+					p[j] = p[j + 1];
+					p[j + 1] = temp;
+				}
+			}
+		}
+	}
 }
 
 // Для ввода используйте поток cin
 // Для вывода используйте поток cout
 void Solve()
 {
-    Task("ExamExt2");
-    int N;
-    cin >> N;
-    cin.ignore();
-    FitnessPerson* fitness = new FitnessPerson[N];
-    for (int i = 0; i < N; i++)
-    {
-        string customer;
-        getline(cin, customer);
+	Task("ExamExt2");
+	int N;
+	cin >> N;
+	cin.ignore();
+	FitnessPerson* fitness = new FitnessPerson[N];
+	for (int i = 0; i < N; i++)
+	{
+		string customer;
+		getline(cin, customer);
 
-        fitness[i].code = code(customer);
-        fitness[i].hours = hours(customer);
-        fitness[i].month = month(customer);
-        fitness[i].year = year(customer);
-    }
-    FitnessPerson** p = new FitnessPerson * [N];
-    for (int i = 0; i < N; i++) p[i] = &fitness[i];
-    Sort(p, N);
-    cout << p[0]->hours << endl;
-    cout << p[0]->year << endl;
-    cout << p[0]->month << endl;
+		fitness[i].code = code(customer);
+		fitness[i].hours = hours(customer);
+		fitness[i].month = month(customer);
+		fitness[i].year = year(customer);
+	}
+	FitnessPerson** p = new FitnessPerson * [N];
+	for (int i = 0; i < N; i++) p[i] = &fitness[i];
+	Sort(p, N);
+	cout << p[0]->hours << endl;
+	cout << p[0]->year << endl;
+	cout << p[0]->month << endl;
 }
