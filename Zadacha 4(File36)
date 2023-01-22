@@ -7,22 +7,32 @@
 
 using namespace std;
 
-void main()
+int main()
 {
-    string fn1;
-    cin >> fn1;
-    ifstream file1(fn1);
-    int size = 0;
-    int* mas;
-    mas = new int[size];
-    int i = 0;
-    while (!file1.eof()) {
-        size++;
-        file1 >> mas[i];
-        i++;
+    int n;
+    int mas;
+    cin >> n;
+    fstream file1, file2;
+    file1.open("C:\\Users\\seopr\\Desktop\\test1.txt", ios::out | ios::binary);
+    file2.open("C:\\Users\\seopr\\Desktop\\test1.txt", ios::out | ios::binary);
+    for (int i = 0; i < n; i++) {
+        cin >> mas;
+        file1.write((char*)&mas, sizeof(mas));
     }
     file1.close();
-    ofstream file2(fn1);
-    for (int j = 0; j < size; j++) file2 << mas[j] << ' ';
-    for (int j = 0; j < size; j++) file2 << mas[j] << ' ';
+    file1.open("C:\\Users\\seopr\\Desktop\\test1.txt", ios::in | ios::binary);
+    for (int i = 0; i < n; i++) {
+        file1.seekg(sizeof(mas) * i, ios::beg);
+        file1.read((char*)&mas, sizeof(mas));
+        cout << mas << " ";
+        file2.write((char*)&mas, sizeof(mas));
+    }
+    for (int i = 0; i < n; i++) {
+        file1.seekg(sizeof(mas) * i, ios::beg);
+        file1.read((char*)&mas, sizeof(mas));
+        cout << mas << " ";
+        file2.write((char*)&mas, sizeof(mas));
+    }
+    file1.close();
+    file2.close();
 }
