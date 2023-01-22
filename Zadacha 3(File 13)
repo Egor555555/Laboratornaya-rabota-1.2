@@ -8,26 +8,36 @@
 
 using namespace std;
 
-void main()
+int main()
 {
-	string fn1, fn2, fn3;
-	cin >> fn1 >> fn2 >> fn3;
-	ifstream file1(fn1);
-	ofstream file2(fn2);
-	ofstream file3(fn3);
-	int size = 0;
-	int* mas;
-	mas = new int[size];
-	int i = 0;
-	while (!file1.eof()) {
-		size++;
-		file1 >> mas[i];
-		i++;
+	fstream file1, file2, file3;
+	file1.open("C:\\Users\\seopr\\Desktop\\test1.txt",ios::out | ios::binary);
+	file2.open("C:\\Users\\seopr\\Desktop\\test2.txt",ios::out | ios::binary);
+	file3.open("C:\\Users\\seopr\\Desktop\\test2.txt",ios::out | ios::binary);
+	int mas;
+	int n;
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> mas;
+		file1.write((char*)&mas, sizeof(mas));
 	}
-	for (int j = size - 1; j >= 0; j--)
-		if (mas[j] > 0)
-			file2 << mas[j] << " ";
-	for (int j = size - 1; j >= 0; j--)
-		if (mas[j] < 0)
-			file3 << mas[j] << " ";
+	file1.close();
+	file1.open("C:\\Users\\seopr\\Desktop\\test1.txt", ios::in | ios::binary);
+	for (int i = n - 1; i >= 0; i--) {
+		file1.seekg(sizeof(mas) * i, ios::beg);
+		file1.read((char*)&mas, sizeof(mas));
+		if (mas > 0)
+			cout << mas << " ";
+		file2.write((char*)&mas, sizeof(mas));
+	}
+	for (int i = n - 1; i >= 0; i--) {
+		file1.seekg(sizeof(mas) * i, ios::beg);
+		file1.read((char*)&mas, sizeof(mas));
+		if (mas < 0)
+			cout << mas << " ";
+		file3.write((char*)&mas, sizeof(mas));
+	}
+	file1.close();
+	file2.close();
+	file3.close();
 }
